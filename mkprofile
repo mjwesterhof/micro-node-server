@@ -1,0 +1,28 @@
+#!/bin/sh
+#
+# Utility to build a new profile.zip from the sources
+# (TODO: this should become part of the Makefile)
+
+
+# Clean up any editor backup files and the old zip file
+rm -f profile.zip profile/*~ profile/*/*~ profile/*.bak profile/*/*.bak
+
+# Fetch the new version number
+v=`cat profile/version.txt`
+echo "Version: $v"
+
+# Update all the XML files first
+for f in profile/nodedef/nodedefs.xml profile/editor/editors.xml; do
+    echo "Processing $f..."
+    sed -i -e 's/^<!-- Version .* -->$/<!-- Version '"$v"' -->/' $f
+done
+
+# And now handle all the NLS text files
+for f in profile/nls/*.txt; do
+    echo "Processing $f..."
+    sed -i -e 's/^#-- Version .* --#$/#-- Version '"$v"' --#/' $f
+done
+
+# Finally, create the zip file that we'll need
+echo "Creating profile.zip..."
+cd profile && zip -r ../profile.zip editor nls nodedef version.txt

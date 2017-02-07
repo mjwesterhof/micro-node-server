@@ -1,0 +1,26 @@
+<!-- Version 0.0.2 -->
+<editors>
+
+  <!-- Raw integer (e.g. time-since-epoch) value -->
+  <editor id="INT32">
+    <!-- 56 is "raw value" -->
+    <range uom="56" min="0" max="2147483647" step="1" prec="0" />
+  </editor>
+
+  <!-- Simple integer value from 0 to 255 -->
+  <editor id="INT8">
+    <!-- 56 is "raw value" -->
+    <range uom="56" min="0" max="255" step="1" prec="0" />
+  </editor>
+
+  <!-- Percentage -->
+  <editor id="PCT">
+    <range uom="51" min="0" max="100" prec="0" />
+  </editor>
+  
+  <!-- On/Off field -->
+  <editor id="ONOFF">
+    <range uom="2" subset="0,1" />
+  </editor>
+
+</editors>

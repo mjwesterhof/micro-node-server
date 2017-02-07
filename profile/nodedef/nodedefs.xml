@@ -1,0 +1,40 @@
+<!-- Version 0.0.2 -->
+<nodeDefs>
+
+  <!-- Main node -->
+  <nodeDef id="ESP_MAIN" nls="EM">
+    <sts>
+      <st id="ST"  editor="PCT"   />
+      <st id="GV1" editor="ONOFF" />
+      <st id="GV2" editor="ONOFF" />
+      <st id="GV3" editor="ONOFF" />
+      <st id="GV4" editor="ONOFF" />
+      <st id="GV5" editor="INT8"  />
+      <st id="GV6" editor="INT8"  />
+      <st id="GV7" editor="INT8"  />
+      <st id="GV8" editor="INT8"  />
+      <st id="GV9" editor="INT32" />
+    </sts>
+    <cmds>
+      <sends>
+	<cmd id="DON" />
+	<cmd id="DOF" />
+	<cmd id="CA" />
+	<cmd id="CB" />
+	<cmd id="CC" />
+	<cmd id="CD" />
+      </sends>
+      <accepts>
+	<cmd id="DON">
+	  <p id="" editor="PCT" init="ST" />
+	</cmd>
+	<cmd id="DOF" />
+	<cmd id="C1"  />
+	<cmd id="C2"  />
+	<cmd id="C3"  />
+	<cmd id="C4"  />
+      </accepts>
+    </cmds>
+  </nodeDef>
+
+</nodeDefs>

@@ -1,0 +1,59 @@
+UNS - micro-node-server - Basic Implementation Notes
+
+REST API - Sent and Received
+
+  URLs from ISY to NS:
+
+  General syntax:
+    http[s]://<nodeserver-address>:<port>/<base>/<nodeaddr>/query
+  - protocol can be https or http -- uns only supports http
+  - <nodeserver-address> is the hostname for the node server
+  - <port> is the port number on which the node server is listening
+  - <base> is the prefix for the URL, entered into the ISY node server
+    configuration menu.  For uns, this is always "uns"
+  - <nodeaddr> is the node address, as described in the ISY docs
+
+  For the examples, where applicable the <nodeaddr> value will generally be
+specified as "n001_esp_xx".  The protocol, address and port will be ommited.
+Those marked with a plus sign are supported, those marked with a minus sign
+are not currently known to actually be sent by the ISY.
+
+ + /uns/add/nodes[<rid>]
+ - /uns/install/<profileNumber>
+ + /uns/nodes/n001_esp_xx/query[<rid>]
+ + /uns/nodes/n001_esp_xx/status[<rid>]
+ + /uns/nodes/n001_esp_xx/cmd/<command>[<cps>][<rid>]
+ + /uns/nodes/n001_esp_xx/cmd/<command>/<value>[<cps>][<rid>]
+ + /uns/nodes/n001_esp_xx/cmd/<command>/<value>/<uom>[<cps>][<rid>]
+ - /uns/nodes/n001_esp_xx/report/rename?name=<nodeName>
+ - /uns/nodes/n001_esp_xx/report/remove
+ - /uns/nodes/n001_esp_xx/report/enable
+ - /uns/nodes/n001_esp_xx/report/disable
+ - /uns/nodes/n001_esp_xx/report/add/<nodeDefId>[<aps>]
+
+  Optional parameters to commands above:
+   <rid> is "requestid=<value>"
+   <cps> is "<p1>.<uom1>=<val1>&<p2>.<uom2>=<val2>..."
+   <aps> is "primary=<nodeAddress>&name=<nodeName>"
+
+  Possible Responses to Incoming Requests:
+
+ + 200 - HTTP_OK
+ + 404 - HTTP_NOT_FOUND
+ ? 503 - HTTP_SERVICE_UNAVAILABLE
+ ? 401 - HTTP_UNAUTHORIZED
+
+  Node Server to ISY URLs:
+
+ - /nodes/n001_esp_xx/remove
+ - /nodes/n001_esp_xx/change/<nodeDefId>
+ + /nodes/n001_esp_xx/add/<nodeDefId>?primary=<primary>&name=<nodeName>
+ + /nodes/n001_esp_xx/report/status/<driverControl>/<value>/<uom>
+ + /nodes/n001_esp_xx/report/cmd/<command>[<cps>]
+ + /nodes/n001_esp_xx/report/cmd/<command>/<value>[<cps>]
+ + /nodes/n001_esp_xx/report/cmd/<command>/<value>/<uom>[<cps>]
+ + /report/status/<requestId>/fail
+ + /report/status/<requestId>/success
+
+  Optional parameters to commands above:
+   <cps> is "<p1>.<uom1>=<val1>&<p2>.<uom2>=<val2>..."
